@@ -18,7 +18,7 @@ const loadNaverMapsScript = (): Promise<void> => {
     
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_CLIENT_ID || 'YOUR_NAVER_CLIENT_ID_HERE'}`;
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=srxc6dj6ko`;
     script.async = true;
     script.onload = () => {
       console.log('네이버 맵 API 스크립트 로드 성공!');
