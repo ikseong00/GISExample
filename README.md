@@ -1,47 +1,36 @@
-# GIS 예제 프로젝트
+# GIS Example 프로젝트
 
-네이버 지도 API와 GeoJSON 데이터를 활용한 지도 시각화 예제 프로젝트입니다.
+네이버 지도 API를 활용한 GIS 데이터 시각화 예제 프로젝트입니다.
 
-## 프로젝트 구조
+## 기능
+- 네이버 맵 연동
+- GeoJSON 데이터 시각화
+- 레이어 컨트롤 지원
+- 다양한 GIS 데이터 유형 지원 (node, street, way, crossing)
 
-- `gis-app/`: React와 TypeScript로 구현된 웹 애플리케이션
-  - `public/geo/`: GeoJSON 데이터 파일들
-  - `src/`: 소스 코드
-    - `types/`: TypeScript 타입 정의
+## 설치 및 실행 방법
 
-## 주요 기능
+```bash
+# 의존성 설치
+npm install
 
-- 네이버 지도와 GeoJSON 데이터를 결합한 시각화
-- Node, Street, Way, Crossing 레이어 토글 기능
-- TypeScript를 활용한 타입 안전성
-- 환경 변수를 통한 API 키 보안 관리
+# 개발 서버 실행
+npm start
+```
 
-## 시작하기
+## 개발 환경
+- React
+- TypeScript
+- 네이버 맵 API
 
-1. `.env` 파일을 생성하고 네이버 지도 API 클라이언트 ID 설정:
-   ```
-   REACT_APP_NAVER_CLIENT_ID=your_client_id
-   ```
+## 개발 브랜치 정보
+- `master`: 안정화된 기본 버전
+- `develop`: 최신 개발 버전 (현재 브랜치)
 
-2. 애플리케이션 설치 및 실행:
-   ```bash
-   cd gis-app
-   npm install
-   npm start
-   ```
+## 주요 디렉토리 구조
+- `/src`: 소스 코드
+- `/public/geo`: GeoJSON 데이터 파일
+- `/shp`: Shapefile 원본 데이터
 
-3. 브라우저에서 `http://localhost:3000` 접속
-
-## 데이터 소스
-
-- GeoJSON 파일들은 `gis-app/public/geo/` 디렉토리에 위치
-- 다음 레이어 데이터가 포함됨:
-  - Node
-  - Street
-  - Way
-  - Crossing
-
-## 보안 참고사항
-
-- API 키는 `.env` 파일에 저장되며 `.gitignore`에 의해 Git에서 제외됨
-- 실제 배포 시 네이버 클라우드 플랫폼에서 도메인 제한 설정 권장 
+## 라이센스
+MIT 

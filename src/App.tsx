@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { Layers, GeoJsonLayers, LayerType, GeoJsonData, GeoJsonLayer } from './types';
 
+// 버전 정보
+const APP_VERSION = '1.1.0-develop';
+
 // 레이어 스타일 정의
 const styles: Record<LayerType, {
   fillColor: string;
@@ -197,6 +200,7 @@ const App: React.FC = () => {
     <div className="container">
       <div className="sidebar">
         <h2>레이어 컨트롤</h2>
+        <div className="version-info">버전: {APP_VERSION}</div>
         <div className="layer-controls">
           <div className="control-item">
             <input 
