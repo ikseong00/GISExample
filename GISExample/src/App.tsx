@@ -2,6 +2,37 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { Layers, GeoJsonLayers, LayerType, GeoJsonData, GeoJsonLayer } from './types';
 
+// 버전 정보
+const APP_VERSION = '1.1.0-develop';
+
+// 네이버 맵 API 스크립트 동적 로드 함수
+const loadNaverMapsScript = (): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    if (window.naver && window.naver.maps) {
+      console.log('네이버 맵 API가 이미 로드되어 있습니다.');
+      resolve();
+      return;
+    }
+
+    console.log('네이버 맵 API 스크립트 로드 중...');
+    
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_CLIENT_ID || 'YOUR_NAVER_CLIENT_ID_HERE'}`;
+    script.async = true;
+    script.onload = () => {
+      console.log('네이버 맵 API 스크립트 로드 성공!');
+      resolve();
+    };
+    script.onerror = (error) => {
+      console.error('네이버 맵 API 스크립트 로드 실패:', error);
+      reject(error);
+    };
+
+    document.head.appendChild(script);
+  });
+};
+
 // 레이어 스타일 정의
 const styles: Record<LayerType, {
   fillColor: string;
@@ -47,6 +78,7 @@ const styles: Record<LayerType, {
 const App: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [isNaverLoaded, setIsNaverLoaded] = useState<boolean>(false);
   const [layers, setLayers] = useState<Layers>({
     node: true,
     street: true,
@@ -60,10 +92,20 @@ const App: React.FC = () => {
     crossing: null
   });
 
+  // 네이버 맵 API 로드
+  useEffect(() => {
+    loadNaverMapsScript()
+      .then(() => {
+        setIsNaverLoaded(true);
+      })
+      .catch((error) => {
+        console.error('네이버 맵 API 로드 오류:', error);
+      });
+  }, []);
+
   // 네이버 지도 초기화
   useEffect(() => {
-    if (!mapRef.current || typeof naver === 'undefined') {
-      console.error('맵 엘리먼트 또는 네이버 지도 API가 로드되지 않았습니다.');
+    if (!mapRef.current || !isNaverLoaded || typeof naver === 'undefined') {
       return;
     }
 
@@ -84,7 +126,7 @@ const App: React.FC = () => {
     } catch (error) {
       console.error('네이버 지도 초기화 실패:', error);
     }
-  }, []);
+  }, [isNaverLoaded]);
 
   // GeoJSON 데이터 로드
   useEffect(() => {
@@ -197,6 +239,7 @@ const App: React.FC = () => {
     <div className="container">
       <div className="sidebar">
         <h2>레이어 컨트롤</h2>
+        <div className="version-info">버전: {APP_VERSION}</div>
         <div className="layer-controls">
           <div className="control-item">
             <input 
