@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 지도 시각화</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>레이어 컨트롤</h2>
+            <div class="layer-controls">
+                <div class="control-item">
+                    <input type="checkbox" id="node-toggle" checked>
+                    <label for="node-toggle">Node</label>
+                </div>
+                <div class="control-item">
+                    <input type="checkbox" id="street-toggle" checked>
+                    <label for="street-toggle">Street</label>
+                </div>
+                <div class="control-item">
+                    <input type="checkbox" id="way-toggle" checked>
+                    <label for="way-toggle">Way</label>
+                </div>
+                <div class="control-item">
+                    <input type="checkbox" id="crossing-toggle" checked>
+                    <label for="crossing-toggle">Crossing</label>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="js/map.js"></script>
+</body>
+</html> 
